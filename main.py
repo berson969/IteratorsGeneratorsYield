@@ -14,7 +14,7 @@ nested_list2 = [
 ]
 
 
-print('Задание 1\n')
+print('Задание 1.1\n')
 # с помощью двух обращений к классу
 class FlatIterator:
     def __init__(self, _list):
@@ -33,6 +33,26 @@ for item in FlatIterator(nested_list1):
         [print(x) for x in FlatIterator(item)]
     else:
         print(item)
+print('=' * 20)
+
+
+print('Задание 1.2\n')
+# с помощью функции sum
+class FlatIterator:
+    def __init__(self, _list):
+        self._list = _list
+    def __iter__(self):
+        self.cursor = -1
+        return self
+    def __next__(self):
+        flat_list = sum(self._list,[])
+        self.cursor += 1
+        if self.cursor == len(flat_list):
+            raise StopIteration  
+        return flat_list[self.cursor]
+
+for item in FlatIterator(nested_list1):
+    print(item)     
 print('=' * 20)
 
 
@@ -117,4 +137,4 @@ def full_flat_generator2(_list):
             yield nest
 
 for item in full_flat_generator2(nested_list2):
-    print(item)            
+    print(item)       
